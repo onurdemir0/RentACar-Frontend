@@ -9,11 +9,17 @@ import { Observable } from 'rxjs';
 })
 export class CarService {
 
-  apiUrl = 'http://localhost:5000/api/cars/getcardetails';
+  apiUrl = 'http://localhost:5000/api/';
 
   constructor(private httpClient: HttpClient) { }
 
   getCars(): Observable<ListResponseModel<Car>> {
-    return this.httpClient.get<ListResponseModel<Car>>(this.apiUrl);
+    let newPath = this.apiUrl + "cars/getcardetails"
+    return this.httpClient.get<ListResponseModel<Car>>(newPath);
+  }
+
+  getCarsByBrand(id:number): Observable<ListResponseModel<Car>> {
+    let newPath = this.apiUrl + "cars/getallbybrandid?id=" + id
+    return this.httpClient.get<ListResponseModel<Car>>(newPath);
   }
 }
