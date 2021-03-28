@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Car } from 'src/app/models/car';
 import { CarService } from 'src/app/services/car.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-car',
@@ -9,7 +10,10 @@ import { CarService } from 'src/app/services/car.service';
   styleUrls: ['./car.component.css'],
 })
 export class CarComponent implements OnInit {
+
   cars: Car[] = [];
+  imageBasePath = environment.imageUrl;
+  
   
   constructor(private carService:CarService,
     private activatedRoute:ActivatedRoute,
@@ -46,7 +50,12 @@ export class CarComponent implements OnInit {
     })
   }
 
-  goToImage(carId:number){
-    this.router.navigate(['./carimage',carId])
+  getCarImage(car:Car){
+    if(car.imagePath){
+      return car.imagePath
+    }
+    else{
+      return 'default.jpg'
+    }
   }
 }
