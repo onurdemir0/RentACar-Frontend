@@ -1,15 +1,24 @@
-<ul class="list-group">
-  <li  
-    (click)="setAllColor()" 
-    routerLink="/cars" 
-    [class]="getAllColorClass()">
-    Tüm Renkler
-  </li>
-  <li
-    (click)="setCurrentColor(color)"
-    routerLink="/cars/color/{{ color.colorId }}"
-    *ngFor="let color of colors"
-    [class]="getCurrentColorClass(color)">
-    {{ color.colorName }}
-  </li>
-</ul>
+<div class="card">
+  <div class="card-header">
+      <div class="mb-2">
+          <label for="filterColorText" class="form-label">Renk Ara</label>
+          <input type="text" [(ngModel)]="filterColorText" id="filterBrandText"
+          class="form-control" placeholder="Renk giriniz..">
+      </div>
+  </div>
+  <ul class="list-group">
+    <li  
+      (click)="setAllColor()" 
+      routerLink="/cars" 
+      [class]="getAllColorClass()">
+      Tüm Renkler
+    </li>
+    <li
+      (click)="setCurrentColor(color)"
+      routerLink="/cars/color/{{ color.colorId }}"
+      *ngFor="let color of colors | filterColorPipe:filterColorText"
+      [class]="getCurrentColorClass(color)">
+      {{ color.colorName }}
+    </li>
+  </ul>
+</div>

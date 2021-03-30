@@ -1,8 +1,18 @@
-<ul class="list-group">
-    <li (click)="setAllBrand()" routerLink="/cars" [class]="getAllBrandClass()">Tüm Markalar</li>
-    <li (click)="setCurrentBrand(brand)"
-     routerLink="/cars/brand/{{brand.brandId}}" *ngFor="let brand of brands" 
-    [class]="getCurrentBrandClass(brand)">{{brand.brandName}}</li>
-</ul> 
+<div class="card">
+    <div class="card-header">
+        <div class="mb-2">
+            <label for="filterBrandText" class="form-label">Marka Ara</label>
+            <input type="text" [(ngModel)]="filterBrandText" id="filterBrandText"
+            class="form-control" placeholder="Marka giriniz..">
+        </div>
+    </div>
+    
+    <ul class="list-group">
+        <li (click)="setAllBrand()" routerLink="/cars" [class]="getAllBrandClass()">Tüm Markalar</li>
+        <li (click)="setCurrentBrand(brand)"
+        routerLink="/cars/brand/{{brand.brandId}}" *ngFor="let brand of brands | filterBrandPipe:filterBrandText" 
+        [class]="getCurrentBrandClass(brand)">{{brand.brandName}}</li>
+    </ul> 
 
-<h5 *ngIf="currentBrand">{{currentBrand.brandName}} seçtiniz</h5>
+    <h5 *ngIf="currentBrand">{{currentBrand.brandName}} seçtiniz</h5>
+</div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 import { Car } from 'src/app/models/car';
 import { CarService } from 'src/app/services/car.service';
 import { environment } from 'src/environments/environment';
@@ -13,10 +14,11 @@ export class CarComponent implements OnInit {
 
   cars: Car[] = [];
   imageBasePath = environment.imageUrl;
-  
+  filterText="";
   
   constructor(private carService:CarService,
     private activatedRoute:ActivatedRoute,
+    private toastrService:ToastrService,
     private router:Router) {}
 
   ngOnInit(): void {
@@ -56,6 +58,14 @@ export class CarComponent implements OnInit {
     }
     else{
       return 'default.jpg'
+    }
+  }
+
+  addToCart(car:Car){
+    if(car.carId===1){
+      this.toastrService.error("Hata", "Bu Araç Kiralanamaz")
+    }else{
+      this.toastrService.success("Sepete Eklendi", car.brandName)
     }
   }
 }

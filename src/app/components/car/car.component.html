@@ -1,24 +1,34 @@
-<div class="mb-3">
-    <label for="filterText" class="form-label">Ürün Ara</label>
-    <input type="text" class="form-control" id="filterText" placeholder="Arama ifadesi giriniz..">
+<div class="card">
+  <div class="card-header">
+    <div class="mb-3">
+        <label for="filterText" class="form-label">Araç Ara</label>
+        <input type="text" [(ngModel)]="filterText" class="form-control" id="filterText" 
+        placeholder="Arama ifadesi giriniz..">
+    </div>
   </div>
-    <div class="row">
-        <div class="col-lg-4 col-md-6 col-sm-12 mb-3" *ngFor="let car of cars">
-            <div  class="card" style="width: 100%;">
-                <img src="{{imageBasePath}}{{car.imagePath}}" class="card-img-top" alt="Araba Resmi">
-                <div class="card-body">
-                  <h5 class="card-title text-center">{{car.description | uppercase}}</h5>
-                  <hr>
-                  <p> <b>Marka :</b> {{car.brandName }} </p>
-                  <hr>
-                  <p> <b>Model Yılı :</b> {{car.modelYear}} </p>
-                  <hr>
-                  <p> <b class="pull-left">Aylık Fiyatı :</b> {{car.dailyPrice|currency: "TRY":""}} ₺</p>
-                  <hr>
-                  <p> <b>Renk :</b> {{car.colorName}} </p>
-                  <hr>
-                  <a routerLink="/cars/detail/{{car.carId}}" class="btn btn-outline-dark mt-2">Detay</a>
-                </div>
+  <div class="card-body">
+      <div class="row">
+          <div class="col-lg-4 col-md-6 col-sm-12 mb-3" *ngFor="let car of cars | filterPipe:filterText">
+              <div  class="card" style="width: 100%;">
+                  <img src="{{imageBasePath}}{{car.imagePath}}" class="card-img-top" alt="Araba Resmi">
+                  <div class="card-body">
+                    <h5 class="card-title text-center">{{car.description | uppercase}}</h5>
+                    <hr>
+                    <p> <b>Marka :</b> {{car.brandName }} </p>
+                    <hr>
+                    <p> <b>Model Yılı :</b> {{car.modelYear}} </p>
+                    <hr>
+                    <p> <b class="pull-left">Aylık Fiyatı :</b> {{car.dailyPrice | vatAdded:18 | currency: "TRY":""}} ₺</p>
+                    <hr>
+                    <p> <b>Renk :</b> {{car.colorName}} </p>
+                    <hr>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md">
+                      <button routerLink="/cars/detail/{{car.carId}}" class="btn btn-dark mt-2">Detay</button>
+                      <button (click)="addToCart(car)" class="btn btn-outline-success mt-2 col-sm-6">Kirala</button>
+                    </div>
+                  </div>
               </div>
-            </div>
           </div>
+      </div>
+  </div>
+</div>
