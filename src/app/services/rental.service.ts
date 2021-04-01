@@ -9,11 +9,17 @@ import { Rental } from '../models/rental';
 })
 export class RentalService {
 
-  apiUrl = 'http://localhost:5000/api/rentals/getallrent';
+  apiUrl = 'http://localhost:5000/api/';
 
   constructor(private httpClient:HttpClient) { }
 
   getRentals(): Observable<ListResponseModel<Rental>>{
-    return this.httpClient.get<ListResponseModel<Rental>>(this.apiUrl);
+    let newPath = this.apiUrl + 'rentals/getallrent';
+    return this.httpClient.get<ListResponseModel<Rental>>(newPath);
+  }
+
+  addRental(rental: Rental) {
+    let newPath = this.apiUrl + 'rentals/add';
+    this.httpClient.post(newPath, rental).subscribe();
   }
 }
