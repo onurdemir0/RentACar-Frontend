@@ -68,4 +68,12 @@ export class CarComponent implements OnInit {
       this.toastrService.success("Sepete Eklendi", car.brandName)
     }
   }
+
+  getSliderClassName(index:number){
+    if(index == 0){
+      return "carousel-item active";
+    } else {
+      return "carousel-item";
+    }
+  }
 }

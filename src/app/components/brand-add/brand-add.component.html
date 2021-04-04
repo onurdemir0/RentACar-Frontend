@@ -1,0 +1,26 @@
+<!--addBrand-->
+<div class="modal fade" id="addBrandModal" tabindex="-1" aria-labelledby="addBrandModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="AddBrandTitle">Marka Ekle</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="brandAddForm" >
+            <div class="row">
+              <div class="col-8">
+                <label for="brandName">Marka</label>
+                <input type="text" class="form-control" id="brandName" formControlName="brandName">
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+          <button class="btn btn-success" (click)="addBrand()" data-bs-dismiss="modal" >Kaydet</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--end addBrand-->
